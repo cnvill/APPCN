@@ -32,6 +32,7 @@ public class BLEstudiante {
                 oEstudiante.setCodigo(rs.getString("codigo"));
                 oEstudiante.setNombre(rs.getString("nombre"));
                 oEstudiante.setDireccion(rs.getString("direccion"));
+                oEstudiante.setEstado(rs.getInt("Estado"));
                 testudiante.add(oEstudiante);
             }
             cn.CerradBD();
