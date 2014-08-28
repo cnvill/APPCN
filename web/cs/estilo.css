@@ -1,12 +1,4 @@
-/* 
-    Document   : estilo
-    Created on : 27/08/2014, 11:26:28 PM
-    Author     : Nuria
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
-root { 
-    display: block;
+.tamanio{
+	font-size: 14px;
+	height: 30px;
 }
-
