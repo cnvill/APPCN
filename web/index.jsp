@@ -3,15 +3,38 @@
     Created on : 24/08/2014, 10:40:32 AM
     Author     : CN
 --%>
-
+<%@page import="java.io.PrintWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="es">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Matricula de Estudiantes</title>
+        <title>Sistema de Matricula</title>        
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">         
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/estilo.css" rel="stylesheet">
+        <script src="js/jquery.js"></script>    
+        <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
-        
+            
+            <form  action="index.jsp" method="GET">
+    		 	<h6 align="center"> Iniciar session como administrador</h6>
+    		 	<div class="row-fluid">                        
+    				    <div class="span4"></div>
+    				    <div class="span3">  	
+    				        <input type="text" name="txtusuario" id="txtusuario" class="input-block-level" placeholder="Usuario" required autofocus />
+    				        <input type="password" name="txtcontrasenia" id="txtcontrasenia" class="input-block-level" placeholder="Contraseña" required />				    
+    				    <p><a href="#">¿Olvidaste tu contraseña?</a></p>
+    					<div class="row-fluid">
+    		                <button type="submit" class="btn btn-primary">Iniciar sesion</button>
+    		                <!-- <button type="reset" class="btn btn-labeled btn-danger">Cancelar</button> -->
+    		            </div>
+                        <div class="span4"></div>
+    		        </div>
+    		    </div>
+	      </form>        
     </body>
 </html>
