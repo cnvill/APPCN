@@ -11,11 +11,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sistema de Matricula</title>        
-        <jsp:include page="View/libreria.jsp"></jsp:include>
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> 
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/estilo.css" rel="stylesheet">
+        <script src="js/jquery.js"></script>    
+        <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
             
-        <form  action="View/listaasignatura.jsp" method="GET">
+        <form  action="View/asingatura/index.jsp" method="GET">
                 <div class="row-fluid">
                     <div class="span4">                        
                     </div>
