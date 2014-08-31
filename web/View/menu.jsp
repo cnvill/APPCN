@@ -9,7 +9,7 @@ HttpSession s= request.getSession();
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </a>
-         <a class="brand" href="#">Biblioteca</a>
+         <a class="brand" href="#">Matricula</a>
        <div class="nav-collapse collapse navbar-inverse-collapse">
            <ul class="nav">                      
              <li class="dropdown">
