@@ -4,14 +4,90 @@
     Author     : Nuria
 --%>
 
+<%@page import="Entidades.TAsignatura"%>
+<%@page import="BL.BLAsignatura"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Registrar Asignatura</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet" media="screen"> 
+        <link href="../../../css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="../../../css/estilo.css" rel="stylesheet">
+        <script src="../../../js/jquery.js"></script>    
+        <script src="../../../js/bootstrap.min.js"></script>
     </head>
     <body>
-        <h1>Hello World!</h1>
+       <jsp:include page="/View/menu.jsp"></jsp:include>
+       <%
+         Boolean r=(request.getParameter("txtcodigo")!=null)?true:false; 
+         if(r){
+             TAsignatura oAsignatura= new TAsignatura();
+            //if(BLAsignatura.RegistrarEstudiante(oAsignatura)=="OK")
+                
+         }
+    /*if((request.getParameter("txttitulo")!=null) &&(request.getParameter("txteditorial")!=null) &&(request.getParameter("txtarea")!=null)){
+        TLibro oLibro=new TLibro();
+        oLibro.setTitulo(request.getParameter("txttitulo"));
+        oLibro.setEditorial(request.getParameter("txteditorial"));
+        oLibro.setArea(request.getParameter("txtarea"));
+        oLibro.setAutor(request.getParameter("txtautor"));
+        BL.BLLibro libro= new BLLibro();
+        String res=libro.RegistrarLibro(oLibro);
+        HttpSession s= request.getSession();
+        s.setAttribute("respuesta_registro", res);
+        response.sendRedirect("lista.jsp");*/
+    %>
+%>%>
+        <div class="content-fluid">
+         <form action="index.jsp" method="post" >
+                <fieldset class="row-fluid">
+                <div class="span2"></div>
+                <div class="span6">
+                <h4>Nueva Asignatura </h4>
+                <div class="row-fluid">
+                    <label for="txtcodigo">Codigo:</label>
+                    <input type="text" name="txtcodigo" placeholder="Ingrese codigo" style="height: 30px;" class="input-xlarge" required>
+                </div>
+                <div class="row-fluid">
+                    <label for="txtnombre">Nombre</label>
+                    <input type="text" name="txtnombre" placeholder="Ingrese Nombre" style="height: 30px;" class="input-xlarge" required>
+                </div>
+                <div class="row-fluid">
+                    <label for="txtcredito">Creditos</label>
+                    <input type="text" name="txtcredito" placeholder="Ingrese Credito"  style="height: 30px;" class="input-xlarge" required>
+                </div>
+                <div class="row-fluid">
+                    <label for="txthp">Horas Teorica:  </label>
+                    <input type="text" name="txthp" placeholder="Ingrese Hora Practica"  style="height: 30px;" class="input-xlarge" required>
+                </div>
+                 <div class="row-fluid">
+                    <label for="txthl">Horas Laboratorio:  </label>
+                    <input type="text" name="txthl" placeholder="Ingrese Hora Laboratorio"  style="height: 30px;" class="input-xlarge" required>
+                </div>
+                <div class="row-fluid">
+                    <label for="cbciclo">Ciclo  </label>
+                    <select name="cbciclo">
+                        <option value="1"> Seleccione una opcion</option>
+                    </select>
+                </div>
+                <div class="row-fluid">
+                    <label for="cbestado">Estado:</label>
+                    <select name="cbestado">
+                        <option value="1"> Activo</option>
+                        <option value="0"> Inactivo</option>
+                    </select>
+                </div>
+                <div class="row-fluid">        
+                    <input type="submit" name="btnregistrar" class="btn btn-primary btn-small" value="Registrar">
+                    <a href="../asiganurta/" class="btn btn-success btn-mini"><i class="icon-white icon-arrow-left"></i> Atras</a>
+                </div>
+                </fieldset>
+                </div>
+         <div class="span4"></div>
+         </form>
+      </div>
     </body>
+    
 </html>

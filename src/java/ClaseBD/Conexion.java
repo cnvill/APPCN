@@ -7,15 +7,15 @@ package ClaseBD;
 import java.sql.*;
 
 public class Conexion {
- protected Connection conexionBD;
- protected Statement st;
+ protected static Connection conexionBD;
+ protected static Statement st;
  
  public Conexion(){
      this.conexionBD=null;
      this.st=null;
  }
  
- public void AbrirBD(){
+ public  static void AbrirBD(){
      try {
          
          Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -30,7 +30,7 @@ public class Conexion {
      }
  }
  
- public ResultSet EjecutarConsulta(String Sql){
+ public static ResultSet EjecutarConsulta(String Sql){
      ResultSet rs=null;
      try {
          rs=st.executeQuery(Sql);         
@@ -40,7 +40,7 @@ public class Conexion {
      return rs;
  }
  
-  public int Ejecutar(String Sql){
+  public static int Ejecutar(String Sql){
       int i=0;
       try {
           i=st.executeUpdate(Sql);
@@ -51,7 +51,7 @@ public class Conexion {
   }       
     
   
- public void CerradBD(){
+ public static void CerradBD(){
     if(conexionBD!=null){
         try {
             conexionBD.close();
