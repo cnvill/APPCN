@@ -4,6 +4,7 @@
     Author     : Nuria
 --%>
 
+<%@page import="org.apache.catalina.Server"%>
 <%@page import="Entidades.TAsignatura"%>
 <%@page import="BL.BLAsignatura"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -21,11 +22,22 @@
     <body>
        <jsp:include page="/View/menu.jsp"></jsp:include>
        <%
-         Boolean r=(request.getParameter("txtcodigo")!=null)?true:false; 
+         Boolean r=(request.getParameter("txtidasignatura")!=null)?true:false; 
          if(r){
              TAsignatura oAsignatura= new TAsignatura();
-            //if(BLAsignatura.RegistrarEstudiante(oAsignatura)=="OK")
-                
+             oAsignatura.setIdasignatura(request.getParameter("txtidasignatura"));
+             oAsignatura.setNombre(request.getParameter("txtnombre"));
+             oAsignatura.setCredito(Integer.parseInt(request.getParameter("txtcredito")));
+             oAsignatura.setHorasteorica(Integer.parseInt(request.getParameter("txthp")));
+             oAsignatura.setHoraspractica(Integer.parseInt(request.getParameter("txthl")));
+             oAsignatura.setCiclo(request.getParameter("cbciclo"));
+             oAsignatura.setCiclo(request.getParameter("cbestado"));
+            if(BLAsignatura.RegistrarEstudiante(oAsignatura)=="OK")
+            {  HttpSession s= request.getSession();
+                    s.setAttribute("respuesta_registro", "Registro satisfactorio");
+                    response.sendRedirect("lista.jsp");
+            }
+            
          }
     /*if((request.getParameter("txttitulo")!=null) &&(request.getParameter("txteditorial")!=null) &&(request.getParameter("txtarea")!=null)){
         TLibro oLibro=new TLibro();
@@ -47,8 +59,8 @@
                 <div class="span6">
                 <h4>Nueva Asignatura </h4>
                 <div class="row-fluid">
-                    <label for="txtcodigo">Codigo:</label>
-                    <input type="text" name="txtcodigo" placeholder="Ingrese codigo" style="height: 30px;" class="input-xlarge" required>
+                    <label for="txtidasignatura">Codigo:</label>
+                    <input type="text" name="txtidasignatura" placeholder="Ingrese codigo" style="height: 30px;" class="input-xlarge" required>
                 </div>
                 <div class="row-fluid">
                     <label for="txtnombre">Nombre</label>
