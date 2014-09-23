@@ -51,7 +51,6 @@
         s.setAttribute("respuesta_registro", res);
         response.sendRedirect("lista.jsp");*/
     %>
-%>%>
         <div class="content-fluid">
          <form action="index.jsp" method="post" >
                 <fieldset class="row-fluid">
