@@ -5,11 +5,24 @@
 --%>
 
 <%@page import="java.io.File"%>
-<%@page import="com.sun.javafx.print.PrintHelper.PrintAccessor"%>
 <%@page import="org.apache.catalina.Server"%>
 <%@page import="Entidades.TAsignatura"%>
 <%@page import="BL.BLAsignatura"%>
+<%@ page import="java.util.*" %>
+<%@ page import="org.apache.commons.fileupload.*" %>
+<%@ page import="org.apache.commons.fileupload.disk.*" %>
+<%@ page import="org.apache.commons.fileupload.servlet.*" %>
+<%@ page import="org.apache.commons.io.*" %>
+<%@ page import="java.io.*" %>
+<%@page import="org.apache.poi.poifs.filesystem.POIFSFileSystem"%>
+<%@ page import="org.apache.poi.hssf.usermodel.HSSFSheet"%>
+<%@ page import="org.apache.poi.hssf.usermodel.HSSFWorkbook"%>
+<%@ page import="org.apache.poi.hssf.usermodel.HSSFRow"%>
+<%@ page import="org.apache.poi.hssf.usermodel.HSSFCell"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Entidades.TAsignatura"%>
+<%@page import="BL.BLAsignatura"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,38 +36,102 @@
     </head>
     <body>
        <jsp:include page="/View/menu.jsp"></jsp:include>
+       
        <%
-         Boolean r=(request.getParameter("txtarchivo")!="" && request.getParameter("txtarchivo")!=null); 
-         if(r){
+    if (request.getParameter("form") != null){
+
+    /*FileItemFactory es una interfaz para crear FileItem*/
+    FileItemFactory file_factory = new DiskFileItemFactory();
+    /*ServletFileUpload esta clase convierte los input file a FileItem*/
+    ServletFileUpload servlet_up = new ServletFileUpload(file_factory);
+    /*sacando los FileItem del ServletFileUpload en una lista */
+    List items = servlet_up.parseRequest(request);
+    for(int i=0;i<items.size();i++){
+    /*FileItem representa un archivo en memoria que puede ser pasado al disco duro*/
+    FileItem item = (FileItem) items.get(i);
+    /*item.isFormField() false=input file; true=text field*/
+    if (! item.isFormField()){
+    //checking content type of file.            
+
+        if(  item.getContentType().equalsIgnoreCase("application/vnd.ms-excel") )
+        {
+            /*cual sera la ruta al archivo en el servidor*/
+            File archivo_server = new File( getServletContext().getRealPath("/archivos")+File.separator+item.getName());
+            /*y lo escribimos en el servido*/ 
+            item.write(archivo_server);
             
-             String nombreArchivo=request.getParameter("txtarchivo");
-             File file =new  File(nombreArchivo);
-             String resp=BLAsignatura.RegistrarMasivo(nombreArchivo);
-            if(resp=="OK")
-            {  HttpSession s= request.getSession();
-                    s.setAttribute("respuesta_registro", "Registro satisfactorio");
-                    response.sendRedirect("../index.jsp");
-            }else
-            {
-                out.println("<h3> Los datos son incorrectos </h3>");
+            String nombreArchivo=archivo_server.toPath().toString();
+            
+                java.util.Date dateInicio = new java.util.Date();
+                POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(nombreArchivo));
+                HSSFWorkbook wb = new HSSFWorkbook(fs);
+                HSSFSheet sheet = wb.getSheetAt(0);
+                HSSFRow row;
+                HSSFCell cell;
+
+                int rows; // No of rows
+                rows = sheet.getPhysicalNumberOfRows();
+
+                int cols = 0; // No of columns
+                int tmp = 0;
+
+                // This trick ensures that we get the data properly even if it doesn't start from first few rows
+                for(int j = 0; j < 10 || j < rows; j++) {
+                    row = sheet.getRow(j);
+                    if(row != null) {
+                        tmp = sheet.getRow(j).getPhysicalNumberOfCells();
+                        if(tmp > cols) cols = tmp;
+                    }
+                }
+                String totalRegistros=""+rows;
+                for(int r = 0; r < rows; r++) {
+                    row = sheet.getRow(r);
+                    if(row != null) {
+                        
+                        out.print(row.getCell((short)2).toString());
+                        
+                        TAsignatura oAsignatura= new TAsignatura();
+                        oAsignatura.setIdasignatura(row.getCell((short)0).toString());
+                        oAsignatura.setNombre(row.getCell((short)1).toString());
+                        oAsignatura.setCredito(4);//Integer.parseInt(row.getCell((short)2).toString())
+                        oAsignatura.setHorasteorica(4);//Integer.parseInt(row.getCell((short)3).toString())
+                        oAsignatura.setHoraspractica(4);//Integer.parseInt(row.getCell((short)4).toString())
+                        oAsignatura.setHoraslaboratorio(5);//Integer.parseInt(row.getCell((short)5).toString())
+                        oAsignatura.setCiclo(row.getCell((short)6).toString());
+                        /*for(int c = 0; c < cols; c++) {
+                            cell = row.getCell((short)c);
+                            if(cell != null) {
+                                
+                            }
+                        }*/
+                        
+                        //Insertando data
+                        BLAsignatura.RegistrarAsignatura(oAsignatura);
+                    }
+                }
+
+                java.util.Date dateFin = new java.util.Date();
+                String tiempo=String.valueOf((dateFin.getTime()-dateInicio.getTime())/1000);
+            out.println("<label class='alert alert-success'>Se registro satisfactoriamente los registros <br/> Tiempo transcurrido: "+tiempo+" segundos </br> Total registros: "+totalRegistros+" </label>");
+            
+           
             }
-         }
-        
-   
+            else
+            {
+                out.print("<label class='alert alert-error'> Formato no correcto. Asegurese de seleccionar un archivo excel </label>");
+            }
+    }
+    }
+    }
+    else
+    { 
     %>
-        <div class="content-fluid">
-         <form action="masivo.jsp" method="post" >
-                <fieldset class="row-fluid">
-                    <input name="txtarchivo" type="file"/>
-                <div class="row-fluid">        
-                    <input type="submit" name="btnregistrar" class="btn btn-primary btn-small" value="Registrar">
-                    <a href="../" class="btn btn-success btn-mini"><i class="icon-white icon-arrow-left"></i> Atras</a>
-                </div>
-                </fieldset>
-                </div>
-         <div class="span4"></div>
-         </form>
-      </div>
+    <form action="masivo.jsp?form=ok" enctype="multipart/form-data" name="form1" method="post">
+    <input type="file" name="file" /><br/>
+    <input type="submit" name="Registrar" value="Registrar" class="btn btn-primary btn-small" />
+    </form>
+    <% 
+    } %> 
     </body>
     
 </html>

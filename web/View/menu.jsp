@@ -13,12 +13,12 @@ HttpSession s= request.getSession();
        <div class="nav-collapse collapse navbar-inverse-collapse">
            <ul class="nav">                      
              <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Asignatura <b class="caret"></b></a>
-               <ul class="dropdown-menu">
+               <a href="asignatura" class="dropdown-toggle" data-toggle="dropdown">Asignatura </a>
+               <!-- <ul class="dropdown-menu">
                  <li><a href="registrar/">Registrar</a></li>
                  <li><a href="prestamo.jsp">Prestamo</a></li>
                  <li><a href="devueltos.jsp">Devueltos</a></li>                          
-               </ul>
+               </ul>-->
              </li>
              <li> <a href="listaalumno.jsp">Estudiante </a> </li>
            </ul>               
