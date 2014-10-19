@@ -4,6 +4,7 @@
     Author     : Nuria
 --%>
 
+<%@page import="com.sun.javafx.print.PrintHelper.PrintAccessor"%>
 <%@page import="org.apache.catalina.Server"%>
 <%@page import="Entidades.TAsignatura"%>
 <%@page import="BL.BLAsignatura"%>
@@ -22,34 +23,29 @@
     <body>
        <jsp:include page="/View/menu.jsp"></jsp:include>
        <%
-         Boolean r=(request.getParameter("txtidasignatura")!=null)?true:false; 
+         Boolean r=(request.getParameter("txtidasignatura")!="" && request.getParameter("txtidasignatura")!=null); 
          if(r){
              TAsignatura oAsignatura= new TAsignatura();
              oAsignatura.setIdasignatura(request.getParameter("txtidasignatura"));
              oAsignatura.setNombre(request.getParameter("txtnombre"));
              oAsignatura.setCredito(Integer.parseInt(request.getParameter("txtcredito")));
-             oAsignatura.setHorasteorica(Integer.parseInt(request.getParameter("txthp")));
-             oAsignatura.setHoraspractica(Integer.parseInt(request.getParameter("txthl")));
+             oAsignatura.setHorasteorica(Integer.parseInt(request.getParameter("txtht")));
+             oAsignatura.setHoraspractica(Integer.parseInt(request.getParameter("txthp")));
+             oAsignatura.setHoraslaboratorio(Integer.parseInt(request.getParameter("txthl")));
              oAsignatura.setCiclo(request.getParameter("cbciclo"));
              oAsignatura.setCiclo(request.getParameter("cbestado"));
-            if(BLAsignatura.RegistrarEstudiante(oAsignatura)=="OK")
+             String resp=BLAsignatura.RegistrarAsignatura(oAsignatura);
+            if(resp=="OK")
             {  HttpSession s= request.getSession();
                     s.setAttribute("respuesta_registro", "Registro satisfactorio");
-                    response.sendRedirect("lista.jsp");
+                    response.sendRedirect("../index.jsp");
+            }else
+            {
+                out.println("<h3> Los datos son incorrectos </h3>");
             }
-            
          }
-    /*if((request.getParameter("txttitulo")!=null) &&(request.getParameter("txteditorial")!=null) &&(request.getParameter("txtarea")!=null)){
-        TLibro oLibro=new TLibro();
-        oLibro.setTitulo(request.getParameter("txttitulo"));
-        oLibro.setEditorial(request.getParameter("txteditorial"));
-        oLibro.setArea(request.getParameter("txtarea"));
-        oLibro.setAutor(request.getParameter("txtautor"));
-        BL.BLLibro libro= new BLLibro();
-        String res=libro.RegistrarLibro(oLibro);
-        HttpSession s= request.getSession();
-        s.setAttribute("respuesta_registro", res);
-        response.sendRedirect("lista.jsp");*/
+        
+   
     %>
         <div class="content-fluid">
          <form action="index.jsp" method="post" >
@@ -70,17 +66,28 @@
                     <input type="text" name="txtcredito" placeholder="Ingrese Credito"  style="height: 30px;" class="input-xlarge" required>
                 </div>
                 <div class="row-fluid">
-                    <label for="txthp">Horas Teorica:  </label>
-                    <input type="text" name="txthp" placeholder="Ingrese Hora Practica"  style="height: 30px;" class="input-xlarge" required>
+                    <label for="txtht">Horas Teorica:  </label>
+                    <input type="text" name="txtht" placeholder="Ingrese Horas Teorica"  style="height: 30px;" class="input-xlarge" required>
+                </div>
+                <div class="row-fluid">
+                    <label for="txthp">Horas Practica:  </label>
+                    <input type="text" name="txthp" placeholder="Ingrese Horas Practica"  style="height: 30px;" class="input-xlarge" required>
                 </div>
                  <div class="row-fluid">
                     <label for="txthl">Horas Laboratorio:  </label>
-                    <input type="text" name="txthl" placeholder="Ingrese Hora Laboratorio"  style="height: 30px;" class="input-xlarge" required>
+                    <input type="text" name="txthl" placeholder="Ingrese Horas Laboratorio"  style="height: 30px;" class="input-xlarge" required>
                 </div>
                 <div class="row-fluid">
                     <label for="cbciclo">Ciclo  </label>
                     <select name="cbciclo">
-                        <option value="1"> Seleccione una opcion</option>
+                        <option value="-1"> Seleccione una opcion</option>
+                            <%
+                            for(int i=1; i<=10; i++){
+                            %>
+                            <option value="<%=i%>"> <%=i%></option>
+                            <%
+                              }
+                            %>
                     </select>
                 </div>
                 <div class="row-fluid">
@@ -92,7 +99,7 @@
                 </div>
                 <div class="row-fluid">        
                     <input type="submit" name="btnregistrar" class="btn btn-primary btn-small" value="Registrar">
-                    <a href="../asiganurta/" class="btn btn-success btn-mini"><i class="icon-white icon-arrow-left"></i> Atras</a>
+                    <a href="../" class="btn btn-success btn-mini"><i class="icon-white icon-arrow-left"></i> Atras</a>
                 </div>
                 </fieldset>
                 </div>

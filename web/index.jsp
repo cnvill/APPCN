@@ -19,7 +19,7 @@
     </head>
     <body>
             
-        <form  action="View/asingatura/index.jsp" method="GET">
+        <form  action="View/asignatura/index.jsp" method="GET">
                 <div class="row-fluid">
                     <div class="span4">                        
                     </div>

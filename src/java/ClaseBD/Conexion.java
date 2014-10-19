@@ -61,4 +61,16 @@ public class Conexion {
     } 
  }
  
+// public static void main(String arg[]){
+//     try {
+//         System.out.println("Hello World!");
+//     Conexion.AbrirBD();
+//     ResultSet r=Conexion.EjecutarConsulta("select * from tasignatura");
+//     r.next();
+//      System.out.println("Hello World!"+r.getRow());
+//     } catch (SQLException e) {
+//      System.out.println(e.getMessage());   
+//     }
+//     
+// }
 }
