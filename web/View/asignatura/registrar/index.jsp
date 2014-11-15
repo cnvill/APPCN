@@ -33,7 +33,7 @@
              oAsignatura.setHoraspractica(Integer.parseInt(request.getParameter("txthp")));
              oAsignatura.setHoraslaboratorio(Integer.parseInt(request.getParameter("txthl")));
              oAsignatura.setCiclo(request.getParameter("cbciclo"));
-             oAsignatura.setCiclo(request.getParameter("cbestado"));
+             oAsignatura.setEstado(Integer.parseInt(request.getParameter("cbestado")));
              String resp=BLAsignatura.RegistrarAsignatura(oAsignatura);
             if(resp=="OK")
             {  HttpSession s= request.getSession();

@@ -6,7 +6,7 @@ package Entidades;
 
 /**
  *
- * @author CN
+ * @author Nuria
  */
 public class TAsignatura {
 

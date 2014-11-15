@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author CN
+ * @author Nuria
  */
 public class BLEstudiante {
     Conexion cn=new Conexion();    

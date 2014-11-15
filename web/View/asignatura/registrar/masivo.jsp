@@ -88,7 +88,7 @@
                     row = sheet.getRow(r);
                     if(row != null) {
                         
-                        out.print(row.getCell((short)2).toString());
+                        //out.print(row.getCell((short)2).toString());
                         
                         TAsignatura oAsignatura= new TAsignatura();
                         oAsignatura.setIdasignatura(row.getCell((short)0).toString());
@@ -129,6 +129,7 @@
     <form action="masivo.jsp?form=ok" enctype="multipart/form-data" name="form1" method="post">
     <input type="file" name="file" /><br/>
     <input type="submit" name="Registrar" value="Registrar" class="btn btn-primary btn-small" />
+    <a href="../" class="btn btn-success btn-mini"><i class="icon-white icon-arrow-left"></i> Atras</a>
     </form>
     <% 
     } %> 

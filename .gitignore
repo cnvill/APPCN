@@ -17,3 +17,4 @@ nbproject/
 *.ear
 /build/
 /web/js/NetBeans
+/AppMongo/build/

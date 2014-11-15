@@ -6,7 +6,7 @@ package BL;
 
 /**
  *
- * @author CN
+ * @author Nuria
  */
 public class BLMatricula {
     
