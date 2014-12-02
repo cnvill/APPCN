@@ -56,7 +56,7 @@
         if(  item.getContentType().equalsIgnoreCase("application/vnd.ms-excel") )
         {
             /*cual sera la ruta al archivo en el servidor*/
-            File archivo_server = new File( getServletContext().getRealPath("/archivos")+File.separator+item.getName());
+            File archivo_server = new File( getServletContext().getRealPath("/Archivos")+File.separator+item.getName());
             /*y lo escribimos en el servido*/ 
             item.write(archivo_server);
             
