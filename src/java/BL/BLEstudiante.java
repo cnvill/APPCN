@@ -31,7 +31,7 @@ public class BLEstudiante {
                 oEstudiante.setCodigo(rs.getString("codigo"));
                 oEstudiante.setNombre(rs.getString("nombre"));
                 oEstudiante.setApellidos(rs.getString("apellidos"));
-                oEstudiante.setDireccion(rs.getString("direccion"));
+                oEstudiante.setDni(rs.getString("dni"));
                 oEstudiante.setEstado(rs.getInt("Estado"));
                 testudiante.add(oEstudiante);
             }
@@ -46,8 +46,8 @@ public class BLEstudiante {
         String Res="No";
         try {
             Conexion.AbrirBD();
-            String consulta="INSERT INTO  testudiante ( codigo ,  nombre ,  apellidos ,  direccion ,  fechanacimiento ,  estado ) VALUES"
-                    + " ( '"+oEstudiante.getCodigo()+"','"+oEstudiante.getNombre()+"', '"+oEstudiante.getApellidos()+"', '"+oEstudiante.getDireccion()+"', now(), "+oEstudiante.getEstado()+")";
+            String consulta="INSERT INTO  testudiante ( codigo ,  nombre ,  apellidos , dni, fechanacimiento ,  estado ) VALUES"
+                    + " ( '"+oEstudiante.getCodigo()+"','"+oEstudiante.getNombre()+"', '"+oEstudiante.getApellidos()+"', '"+oEstudiante.getDni()+"', now(), "+oEstudiante.getEstado()+")";
             if(Conexion.Ejecutar(consulta)==1)
                 Res="OK";
             Conexion.CerradBD();

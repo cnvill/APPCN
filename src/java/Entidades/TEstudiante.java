@@ -16,7 +16,7 @@ public class TEstudiante {
     private String codigo;
     private String nombre;
     private String apellidos;
-    private String direccion;
+    private String dni;
     private Date fechanacimiento;
     private Integer estado;
 
@@ -79,15 +79,15 @@ public class TEstudiante {
     /**
      * @return the direccion
      */
-    public String getDireccion() {
-        return direccion;
+    public String getDni() {
+        return dni;
     }
 
     /**
      * @param direccion the direccion to set
      */
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDni(String direccion) {
+        this.dni = direccion;
     }
 
     /**

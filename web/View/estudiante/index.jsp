@@ -25,7 +25,7 @@
                         <th>Codigo</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
-                        <th>Direcci&oacute;n</th>
+                        <th>DNI</th>
                         <th>Fecha Nacimiento</th>
                         <th>Estado</th>
                     </thead>
@@ -40,7 +40,7 @@
                                      <td><%=lEstudiante.get(cont).getCodigo() %></td>
                                      <td><%=lEstudiante.get(cont).getNombre() %></td>
                                     <td><%=lEstudiante.get(cont).getApellidos() %></td>                                    
-                                    <td><%=lEstudiante.get(cont).getDireccion() %></td>  
+                                    <td><%=lEstudiante.get(cont).getDni()%></td>  
                                     <td><%=lEstudiante.get(cont).getFechanacimiento() %></td>
                                     <td><%=lEstudiante.get(cont).getEstado() %></td>  
                                  </tr>
