@@ -14,7 +14,15 @@ public class TDetMatricula {
     private Integer idmatricula;
     private String idasignatura;
     private Integer estado;
+    private Integer credito;
 
+    public Integer getCredito() {
+        return credito;
+    }
+
+    public void setCredito(Integer credito) {
+        this.credito = credito;
+    }
     /**
      * @return the iddetmatricula
      */
@@ -70,4 +78,5 @@ public class TDetMatricula {
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
+
 }

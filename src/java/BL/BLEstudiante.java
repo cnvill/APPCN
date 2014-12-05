@@ -19,7 +19,7 @@ public class BLEstudiante {
         
     }
      
-    public ArrayList<TEstudiante> ListaEstudiantes(){
+    public static ArrayList<TEstudiante> ListaEstudiantes(){
         ArrayList<TEstudiante> testudiante= new ArrayList<TEstudiante>();
         try {
             Conexion.AbrirBD();

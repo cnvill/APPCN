@@ -32,7 +32,7 @@ public class BLAsignatura {
         return Res;
     }
     
-    public ArrayList<TAsignatura> ListaAsignaturas(){
+    public static ArrayList<TAsignatura> ListaAsignaturas(){
         ArrayList<TAsignatura> tasignatura= new ArrayList<TAsignatura>();
         try {
             Conexion.AbrirBD();
@@ -56,11 +56,7 @@ public class BLAsignatura {
         }
      return tasignatura;
     }
-    
-    public static String RegistrarMasivo(String nombreArchivo){
-    
-    return "";
-    }
+   
 // public static void main(String arg[]){
 //     try {
 //         BLAsignatura bl=new BLAsignatura();  

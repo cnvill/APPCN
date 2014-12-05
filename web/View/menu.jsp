@@ -21,6 +21,7 @@ HttpSession s= request.getSession();
                </ul>-->
              </li>
              <li> <a href="/AppTesisMatricula/View/estudiante/index.jsp">Estudiante </a> </li>
+             <li> <a href="/AppTesisMatricula/View/matricula/index.jsp">Generar Matricula </a> </li>
            </ul>               
            <ul class="nav pull-right">
              <li> 
