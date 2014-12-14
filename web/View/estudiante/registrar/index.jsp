@@ -32,7 +32,7 @@
              oEstudiante.setCodigo(request.getParameter("txtcodigo"));
              oEstudiante.setNombre(request.getParameter("txtnombre"));
              oEstudiante.setApellidos(request.getParameter("txtapellidos"));
-             oEstudiante.setDireccion(request.getParameter("txtdireccion"));
+             //oEstudiante.setDireccion(request.getParameter("txtdireccion"));
              //oEstudiante.setFechanacimiento(Date.);
              oEstudiante.setEstado(Integer.parseInt(request.getParameter("cbestado")));
              String resp=BLEstudiante.RegistrarEstudiante(oEstudiante);
