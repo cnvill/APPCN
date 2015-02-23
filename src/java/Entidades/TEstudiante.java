@@ -20,6 +20,7 @@ public class TEstudiante {
     private Date fechanacimiento;
     private Integer estado;
 
+    
     /**
      * @return the idestudiante
      */
@@ -117,4 +118,5 @@ public class TEstudiante {
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
+    
 }
