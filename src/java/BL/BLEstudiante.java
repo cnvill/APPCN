@@ -31,6 +31,7 @@ public class BLEstudiante {
                 oEstudiante.setCodigo(rs.getString("codigo"));
                 oEstudiante.setNombre(rs.getString("nombre"));
                 oEstudiante.setApellidos(rs.getString("apellidos"));
+                oEstudiante.setFechanacimiento(rs.getDate("fechanacimiento").toString());
                 oEstudiante.setDni(rs.getString("dni"));
                 oEstudiante.setEstado(rs.getInt("Estado"));
             }
@@ -79,6 +80,7 @@ public class BLEstudiante {
                 oEstudiante.setNombre(rs.getString("nombre"));
                 oEstudiante.setApellidos(rs.getString("apellidos"));
                 oEstudiante.setDni(rs.getString("dni"));
+                oEstudiante.setFechanacimiento(rs.getDate("fechanacimiento").toString());
                 oEstudiante.setEstado(rs.getInt("Estado"));
                 testudiante.add(oEstudiante);
             }
@@ -109,10 +111,10 @@ public class BLEstudiante {
         String Res="No";
         try {
             Conexion.AbrirBD();
-            String consulta=" Update  testudiante set codigo='"+oEstudiante.getCodigo()+"',  nombre='"+oEstudiante.getNombre()+"'"
+            String consulta=" Update  testudiante set codigo='"+oEstudiante.getCodigo()+"',  nombre='"+oEstudiante.getNombre()+"', "
                     + " apellidos='"+oEstudiante.getApellidos()+"', dni='"+oEstudiante.getDni()+"',"
                     + " fechanacimiento = now() ,  estado=1"
-                    + " where idestudiante= "+oEstudiante.getCodigo();
+                    + " where idestudiante= "+oEstudiante.getIdestudiante();
             if(Conexion.Ejecutar(consulta)==1)
                 Res="OK";
             Conexion.CerradBD();

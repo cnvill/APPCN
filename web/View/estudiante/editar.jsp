@@ -53,9 +53,7 @@
                 <div class="span2"></div>
                 <div class="span6">
                 <h4>Editar Estudiante </h4>
-                <% 
-                out.print(request.getParameter("idestudiante"));
-                
+                <%                
                 TEstudiante oEstudiate= new TEstudiante();
                 oEstudiate= BLEstudiante.GetEstudiante(request.getParameter("idestudiante"));
                 %>
