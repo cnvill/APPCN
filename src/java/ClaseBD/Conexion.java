@@ -43,9 +43,11 @@ public class Conexion {
   public static int Ejecutar(String Sql){
       int i=0;
       try {
-          i=st.executeUpdate(Sql);
+          //i=st.executeUpdate(Sql);
+          if(st.execute(Sql))
+              i=1;
       } catch (Exception e) {
-          System.err.println("Error en Ejecutar"+e.getMessage());
+          new Exception(e.getMessage());
       }
     return i;
   }       

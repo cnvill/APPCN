@@ -20,6 +20,7 @@ public class BLAsignatura {
         String Res="No";
         try {
             Conexion.AbrirBD();
+            
             String consulta="INSERT INTO tasignatura(idasignatura, nombre, creditos, horasteorica, horaspractica, horaslaboratorio, totalhoras, ciclo, estado) \n" +
                             "VALUES ( '"+oAsignatura.getIdasignatura()+"','"+oAsignatura.getNombre()+"',"+oAsignatura.getCredito()+","+oAsignatura.getHorasteorica()+","+oAsignatura.getHoraspractica()+","+oAsignatura.getHoraslaboratorio()+"," +(oAsignatura.getHoraslaboratorio()+oAsignatura.getHoraspractica()+oAsignatura.getHorasteorica()) +", '"+oAsignatura.getCiclo()+ "' ,1)";
             if(Conexion.Ejecutar(consulta)==1)

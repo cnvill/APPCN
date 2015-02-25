@@ -51,7 +51,8 @@
     /*item.isFormField() false=input file; true=text field*/
     if (! item.isFormField()){
     //checking content type of file.            
-
+        out.print("<label class='alert alert-error'> "+item.getContentType()+" </label>");
+                        
         if(  item.getContentType().equalsIgnoreCase("application/vnd.ms-excel") )
         {
             /*cual sera la ruta al archivo en el servidor*/
@@ -85,15 +86,13 @@
                 String totalRegistros=""+rows;
                 for(int r = 0; r < rows; r++) {
                     row = sheet.getRow(r);
-                    if(row != null) {
-                        
-                        //out.print(row.getCell((short)2).toString());
-                        
+                    if(row != null) {                        
+                        //out.print(row.getCell((short)2).toString());                        
                         TEstudiante oEstudiante= new TEstudiante();
-                        oEstudiante.setCodigo(row.getCell((short)0).toString());
-                        oEstudiante.setNombre(row.getCell((short)1).toString());
-                        oEstudiante.setApellidos(row.getCell((short)2).toString());
-                        oEstudiante.setDni(row.getCell((short)3).toString());
+                        oEstudiante.setCodigo(row.getCell(0).toString());
+                        oEstudiante.setNombre(row.getCell(1).toString());
+                        oEstudiante.setApellidos(row.getCell(2).toString());
+                        oEstudiante.setDni(row.getCell(3).toString());
                         oEstudiante.setEstado(1);
                         /*for(int c = 0; c < cols; c++) {
                             cell = row.getCell((short)c);
@@ -101,9 +100,10 @@
                                 
                             }
                         }*/
-                        
+                        String Resp=BLEstudiante.RegistrarEstudiante(oEstudiante);
                         //Insertando data
-                        BLEstudiante.RegistrarEstudiante(oEstudiante);
+                        if(Resp!="OK")
+                            out.print("<label class='alert alert-error'> "+Resp+" </label>");
                     }
                 }
 
