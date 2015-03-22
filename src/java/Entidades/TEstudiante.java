@@ -17,9 +17,10 @@ public class TEstudiante {
     private String nombre;
     private String apellidos;
     private String dni;
-    private Date fechanacimiento;
+    private String fechanacimiento;
     private Integer estado;
 
+    
     /**
      * @return the idestudiante
      */
@@ -90,20 +91,7 @@ public class TEstudiante {
         this.dni = direccion;
     }
 
-    /**
-     * @return the fechanacimiento
-     */
-    public Date getFechanacimiento() {
-        return fechanacimiento;
-    }
-
-    /**
-     * @param fechanacimiento the fechanacimiento to set
-     */
-    public void setFechanacimiento(Date fechanacimiento) {
-        this.fechanacimiento = fechanacimiento;
-    }
-
+  
     /**
      * @return the estado
      */
@@ -117,4 +105,19 @@ public class TEstudiante {
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
+
+    /**
+     * @return the fechanacimiento
+     */
+    public String getFechanacimiento() {
+        return fechanacimiento;
+    }
+
+    /**
+     * @param fechanacimiento the fechanacimiento to set
+     */
+    public void setFechanacimiento(String fechanacimiento) {
+        this.fechanacimiento = fechanacimiento;
+    }
+    
 }
