@@ -50,9 +50,7 @@
     FileItem item = (FileItem) items.get(i);
     /*item.isFormField() false=input file; true=text field*/
     if (! item.isFormField()){
-    //checking content type of file.            
-        out.print("<label class='alert alert-error'> "+item.getContentType()+" </label>");
-                        
+    //checking content type of file.          
         if(  item.getContentType().equalsIgnoreCase("application/vnd.ms-excel") )
         {
             /*cual sera la ruta al archivo en el servidor*/
@@ -102,8 +100,8 @@
                         }*/
                         String Resp=BLEstudiante.RegistrarEstudiante(oEstudiante);
                         //Insertando data
-                        if(Resp!="OK")
-                            out.print("<label class='alert alert-error'> "+Resp+" </label>");
+                        //if(Resp!="OK")
+                        //out.print("<label class='alert alert-error'> "+Resp+" </label>");
                     }
                 }
 

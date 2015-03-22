@@ -21,7 +21,7 @@ public class BLDetMatricula {
         try {
             Conexion.AbrirBD();
             String consulta="INSERT INTO tdetmatricula(idmatricula, idasignatura, credito, estado) \n" +
-                            "VALUES ( "+oDetMatricula.getIdmatricula()+", "+oDetMatricula.getIdasignatura()+", "+oDetMatricula.getCredito()+" ,1)";
+                            "VALUES ( "+oDetMatricula.getIdmatricula()+", '"+oDetMatricula.getIdasignatura()+"', "+oDetMatricula.getCredito()+" ,1)";
             if(Conexion.Ejecutar(consulta)==1)
                 Res="OK";
             Conexion.CerradBD();

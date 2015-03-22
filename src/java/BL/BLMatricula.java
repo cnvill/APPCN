@@ -39,23 +39,40 @@ public class BLMatricula {
                 oMatricula.setIdestudiante(listaEstudiantes.get(i).getIdestudiante());
                 oMatricula.setSemestre("III");
                 oMatricula.setTotalcreditos(i);
-                InsertMatricula(oMatricula);
+                InsertMatricula(oMatricula);String idMatricula=getMaxIdMatricula();
+                int totalCredito=0;
                 for (int j = 0; j < nA; j++) {
                     oDetMatricula= new TDetMatricula();
                     oDetMatricula.setIdasignatura(listaAsignaturas.get(j).getIdasignatura());
                     oDetMatricula.setEstado(1);
-                    String idasignatura=getMaxIdMatricula();
-                    oDetMatricula.setIdmatricula(Integer.parseInt(idasignatura));
+                    oDetMatricula.setIdmatricula(Integer.parseInt(idMatricula));
                     oDetMatricula.setCredito(listaAsignaturas.get(j).getCredito());
                     BLDetMatricula.RegistrarDetMatricula(oDetMatricula);
+                    totalCredito=totalCredito+listaAsignaturas.get(j).getCredito();                    
                 }
+                ActualizaCreditoMatricula(idMatricula, totalCredito);
             }
-            
         
         } catch (Exception e) {
             respuesta=respuesta+e.getMessage();
         }
         return respuesta;
+    }
+    
+    
+    public static void ActualizaCreditoMatricula(String idMatricula, int totalCredito ){
+         String resp="";
+        try {
+            Conexion.AbrirBD();
+            String consulta="update  tmatricula set totalcredito="+totalCredito+" where idmatricula="+idMatricula;
+            if(Conexion.Ejecutar(consulta)==1)
+                resp="OK";
+            Conexion.CerradBD();
+            resp="OK";
+        } catch (Exception e) {
+            resp=e.getMessage();
+        }
+        
     }
     
     public static String InsertMatricula(TMatricula oMatricula){
