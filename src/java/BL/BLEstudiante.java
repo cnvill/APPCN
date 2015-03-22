@@ -131,11 +131,11 @@ public class BLEstudiante {
         return Res;
     }
     
-         
-public static void main( String args[] ){
-       String resp=UniTestRegistrarEstudiante();
-        System.out.println(resp);
-}
+//         
+//public static void main( String args[] ){
+//       String resp=UniTestRegistrarEstudiante();
+//        System.out.println(resp);
+//}
 
 
      public static String ActualizarEstudiante(TEstudiante oEstudiante){
