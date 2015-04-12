@@ -56,6 +56,63 @@
     /*item.isFormField() false=input file; true=text field*/
     if (! item.isFormField()){
     //checking content type of file. 
+        if(  item.getContentType().equalsIgnoreCase("application/vnd.ms-excel") )
+        {
+            /*cual sera la ruta al archivo en el servidor*/
+            File archivo_server = new File( getServletContext().getRealPath("/Archivos")+File.separator+item.getName());
+            /*y lo escribimos en el servido*/ 
+            item.write(archivo_server);
+            
+            String nombreArchivo=archivo_server.toPath().toString();
+            
+                java.util.Date dateInicio = new java.util.Date();
+                POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(nombreArchivo));
+                HSSFWorkbook wb = new HSSFWorkbook(fs);
+                HSSFSheet sheet = wb.getSheetAt(0);
+                HSSFRow row;
+                HSSFCell cell;
+                int rows; // No of rows
+                rows = sheet.getPhysicalNumberOfRows();
+                int cols = 0; // No of columns
+                int tmp = 0;
+                // This trick ensures that we get the data properly even if it doesn't start from first few rows
+                for(int j = 0; j < 10 || j < rows; j++) {
+                    row = sheet.getRow(j);
+                    if(row != null) {
+                        tmp = sheet.getRow(j).getPhysicalNumberOfCells();
+                        if(tmp > cols) cols = tmp;
+                    }
+                }
+                String totalRegistros=""+rows;
+                for(int r = 0; r < rows; r++) {
+                    row = sheet.getRow(r);
+                    if(row != null) {                        
+                        //out.print(row.getCell((short)2).toString());                        
+                        TEstudiante oEstudiante= new TEstudiante();
+                        oEstudiante.setCodigo(row.getCell(0).toString());
+                        oEstudiante.setNombre(row.getCell(1).toString());
+                        oEstudiante.setApellidos(row.getCell(2).toString());
+                        oEstudiante.setDni(row.getCell(3).toString());
+                        oEstudiante.setEstado(1);
+                        /*for(int c = 0; c < cols; c++) {
+                            cell = row.getCell((short)c);
+                            if(cell != null) {
+                                
+                            }
+                        }*/
+                        String Resp=BLEstudiante.RegistrarEstudiante(oEstudiante);
+                        //Insertando data
+                        //if(Resp!="OK")
+                        //out.print("<label class='alert alert-error'> "+Resp+" </label>");
+                    }
+                }
+                java.util.Date dateFin = new java.util.Date();
+                String tiempo=String.valueOf((dateFin.getTime()-dateInicio.getTime())/1000);
+            out.println("<label class='alert alert-success'>Se registro satisfactoriamente los registros <br/> Tiempo transcurrido: "+tiempo+" segundos </br> Total registros: "+totalRegistros+" </label>");
+            
+           
+            }
+         else
         if(  item.getContentType().equalsIgnoreCase("text/xml") )
         {
             /*cual sera la ruta al archivo en el servidor*/
@@ -103,7 +160,8 @@
     {
     %>
     <form action="masivo.jsp?form=ok" enctype="multipart/form-data" name="form1" method="post">
-    <input type="file" name="file" /><br/>
+    <label>    Cargue un archivo en formato xls o xml</label>
+     <input type="file" name="file" /><br/>
     <input type="submit" name="Registrar" value="Registrar" class="btn btn-primary btn-small" />
     <a href="estudiante" class="btn btn-success btn-mini"><i class="icon-white icon-arrow-left"></i> Atras</a>
     </form>
