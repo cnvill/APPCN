@@ -142,14 +142,13 @@ public class BLEstudiante {
         String Res="No";
         try {
             Conexion.AbrirBD();
-            String consulta=" Update  testudiante set codigo='"+oEstudiante.getCodigo()+"',  nombre='"+oEstudiante.getNombre()+"', "
+            String consulta=" update  testudiante set codigo='"+oEstudiante.getCodigo()+"',  nombre='"+oEstudiante.getNombre()+"', "
                     + " apellidos='"+oEstudiante.getApellidos()+"', dni='"+oEstudiante.getDni()+"',"
                     + " fechanacimiento = now() ,  estado=1"
                     + " where idestudiante= "+oEstudiante.getIdestudiante();
             if(Conexion.Ejecutar(consulta)==1)
                 Res="OK";
-            Conexion.CerradBD();
-            
+                        
         } catch (Exception e) {
             Res="NO"+e.getMessage();
         }

@@ -28,6 +28,8 @@
        <%
          Boolean r=(request.getParameter("txtcodigo")!="" && request.getParameter("txtcodigo")!=null); 
          if(r){
+             java.util.Date dateInicio = new java.util.Date();
+             
              TEstudiante oEstudiante= new TEstudiante();
              oEstudiante.setIdestudiante(Integer.parseInt(request.getParameter("txtIdEstudiante").toString()));
              oEstudiante.setCodigo(request.getParameter("txtcodigo"));
@@ -38,14 +40,15 @@
              String resp=BLEstudiante.ActualizarEstudiante(oEstudiante);
             if(resp=="OK")
             {  HttpSession s= request.getSession();
-                    s.setAttribute("respuesta_registro", "Registro satisfactorio");
+                    java.util.Date dateFin = new java.util.Date();
+                    String tiempo=String.valueOf((dateFin.getTime()-dateInicio.getTime()));
+                    s.setAttribute("respuesta_registro", "Tiempo transcurrido en Editar: "+tiempo+" Milisegundos");
                     response.sendRedirect("index.jsp");
             }else
             {
-                out.println("<h3> Los datos son incorrectos </h3>");
+                out.println("<h3> Los datos son incorrectos </h3>"+resp);
             }
-         }       
-   
+         }
     %>
         <div class="content-fluid">
          <form action="editar.jsp" method="post" >
@@ -76,7 +79,7 @@
                 </div>
                 <div class="row-fluid">
                     <label for="txtFechaNacimiento">Fecha Nacimiento:</label>
-                    <input type="dae" name="txtFechaNacimiento"  value="<%=oEstudiate.getFechanacimiento()%>" placeholder="Igrese Fecha Nacimiento"  style="height: 30px;" class="input-xlarge" required>
+                      <input type="date" name="txtFechaNacimiento"  value="<%=oEstudiate.getFechanacimiento()%>" placeholder="Igrese Fecha Nacimiento"  style="height: 30px;" class="input-xlarge" required>
                 </div>
                 <div class="row-fluid">
                     <label for="cbestado">Estado:</label>
