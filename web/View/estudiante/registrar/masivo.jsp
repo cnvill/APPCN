@@ -153,6 +153,11 @@
             out.println("<label class='alert alert-success'>Se registro satisfactoriamente los registros <br/> Tiempo transcurrido: "+tiempo+" segundos </br> Total registros: "+totalRegistros+" </label>");
             
         }
+        else
+        {
+             out.print("<label class='alert alert-error'> Formato no correcto. Asegurese de seleccionar un archivo excel </label>");
+           
+        }
       }
      }
     }

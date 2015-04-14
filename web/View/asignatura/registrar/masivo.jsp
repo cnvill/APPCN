@@ -137,7 +137,7 @@
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     
-                     TAsignatura oAsignatura= new TAsignatura();
+                        TAsignatura oAsignatura= new TAsignatura();
                         oAsignatura.setIdasignatura(eElement.getElementsByTagName("column").item(0).getTextContent().toString());
                         oAsignatura.setNombre(eElement.getElementsByTagName("column").item(1).getTextContent().toString());
                         oAsignatura.setCredito(Integer.parseInt(eElement.getElementsByTagName("column").item(2).getTextContent().toString()));
